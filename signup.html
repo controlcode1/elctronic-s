@@ -11,40 +11,26 @@
     <meta name="theme-color" content="#2563EB">
 </head>
 
-<body>
-    <!-- ===== NAVIGATION ===== -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-                <span class="logo-text">ElectroTech</span>
-            </a>
-
-            <div class="nav-links" id="navLinks">
-                <a href="index.html" data-i18n="home">Home</a>
-                <a href="index.html#products" data-i18n="products">Products</a>
-                <a href="contact.html" data-i18n="contact">Contact</a>
-            </div>
-
-            <div class="nav-actions">
-                <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">
-                    <i class="fas fa-globe"></i>
-                    <span data-i18n="langToggle">عربي</span>
-                </button>
-
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+<body class="auth-page-dark">
+    <!-- ===== DARK AUTH PAGE ===== -->
+    <div class="auth-dark-overlay"></div>
+    
+    <div class="auth-dark-container">
+        <!-- Logo/Brand -->
+        <div class="auth-brand">
+            <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+            <span class="logo-text">ElectroTech</span>
         </div>
-    </nav>
 
-    <!-- ===== SIGNUP ===== -->
-    <div class="auth-container">
-        <div class="auth-box">
-            <div class="auth-header">
-                <h2 data-i18n="createAccount">Create Account</h2>
-                <p data-i18n="joinDesc">Join the future of electronics shopping</p>
+        <!-- Auth Card -->
+        <div class="auth-card-dark">
+            <div class="auth-header-dark">
+                <p class="auth-label" data-i18n="startForFree">START FOR FREE</p>
+                <h1 data-i18n="createAccount">Create your account</h1>
+                <p class="auth-subtitle">
+                    <span data-i18n="haveAccount">Already have an account?</span>
+                    <a href="login.html" class="auth-link" data-i18n="signIn">Sign In</a>
+                </p>
             </div>
 
             <div class="auth-error" id="signupError">
@@ -52,40 +38,46 @@
                 <span id="signupErrorMsg"></span>
             </div>
 
-            <form id="signupForm">
-                <div class="form-group">
+            <form id="signupForm" class="auth-form-dark">
+                <div class="form-group-dark">
                     <label><i class="fas fa-user"></i> <span data-i18n="fullName">Full Name</span></label>
-                    <input type="text" class="form-input" id="signupName" placeholder="Ahmed Mohammed" required>
+                    <input type="text" class="input-underline input-dark" id="signupName" placeholder="Ahmed Mohammed" required>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group-dark">
                     <label><i class="fas fa-envelope"></i> <span data-i18n="emailAddress">Email Address</span></label>
-                    <input type="email" class="form-input" id="signupEmail" placeholder="ahmed@example.com" required>
+                    <input type="email" class="input-underline input-dark" id="signupEmail" placeholder="ahmed@example.com" required>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group-dark">
                     <label><i class="fas fa-phone"></i> <span data-i18n="phoneNumber">Phone Number</span></label>
-                    <input type="tel" class="form-input" id="signupPhone" placeholder="0770 123 4567" required>
+                    <input type="tel" class="input-underline input-dark" id="signupPhone" placeholder="0770 123 4567" required>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group-dark">
                     <label><i class="fas fa-lock"></i> <span data-i18n="password">Password</span></label>
-                    <input type="password" class="form-input" id="signupPassword" placeholder="••••••••" required>
+                    <input type="password" class="input-underline input-dark" id="signupPassword" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="auth-btn" data-i18n="createAccount">Create Account</button>
+
+                <div class="auth-actions-dark">
+                    <button type="button" class="btn-gray" onclick="window.location.href='index.html'" data-i18n="backToHome">Back to Home</button>
+                    <button type="submit" class="btn-blue" data-i18n="createAccount">Create Account</button>
+                </div>
             </form>
 
-            <div class="social-login">
-                <p data-i18n="orSignUpWith">or sign up with</p>
-                <div class="social-btns">
-                    <button class="social-btn"><i class="fab fa-google"></i></button>
-                    <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
-                    <button class="social-btn"><i class="fab fa-apple"></i></button>
-                </div>
+            <div class="auth-footer-dark">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-i18n="joinDesc">Join thousands of satisfied customers</span>
+                </p>
             </div>
-
-            <p style="text-align:center; margin-top:24px; color:var(--color-gray-500); font-size:0.9rem;">
-                <span data-i18n="haveAccount">Already have an account?</span>
-                <a href="login.html" style="color:var(--color-primary-600); font-weight:600;" data-i18n="login">Login</a>
-            </p>
         </div>
+
+        <!-- Language Toggle (Bottom Right) -->
+        <button class="lang-toggle-dark" id="langToggleBtn" onclick="toggleLanguage()">
+            <i class="fas fa-globe"></i>
+            <span data-i18n="langToggle">عربي</span>
+        </button>
     </div>
 
     <script src="i18n.js"></script>
@@ -94,33 +86,23 @@
         document.addEventListener('DOMContentLoaded', function () {
             initI18n();
 
-            // Mobile menu
-            const toggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
-            if (toggle && navLinks) {
-                toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
-            }
-
             const auth = new Auth();
             const form = document.getElementById('signupForm');
 
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+                
                 const name = document.getElementById('signupName').value.trim();
                 const email = document.getElementById('signupEmail').value.trim();
                 const phone = document.getElementById('signupPhone').value.trim();
                 const password = document.getElementById('signupPassword').value;
 
-                if (!name || !email || !phone || !password) {
-                    showSignupError(t('fillAllFields'));
-                    return;
-                }
-
                 const result = auth.register(name, email, phone, password);
+                
                 if (result.success) {
-                    // Auto login
+                    // Auto login after registration
+                    auth.login(email, password);
                     const userData = {
-                        id: Date.now(),
                         name: name,
                         email: email,
                         role: 'user',
@@ -129,20 +111,14 @@
                     localStorage.setItem('electro_current_user', JSON.stringify(userData));
                     window.location.href = 'index.html';
                 } else {
-                    showSignupError(result.message);
+                    const errorBox = document.getElementById('signupError');
+                    const errorMsg = document.getElementById('signupErrorMsg');
+                    errorMsg.textContent = result.message || 'Registration failed';
+                    errorBox.classList.add('show');
+                    setTimeout(() => errorBox.classList.remove('show'), 4000);
                 }
             });
         });
-
-        function showSignupError(msg) {
-            const errorBox = document.getElementById('signupError');
-            const errorMsg = document.getElementById('signupErrorMsg');
-            if (errorMsg) errorMsg.textContent = msg;
-            if (errorBox) {
-                errorBox.classList.add('show');
-                setTimeout(() => errorBox.classList.remove('show'), 4000);
-            }
-        }
     </script>
 </body>
 

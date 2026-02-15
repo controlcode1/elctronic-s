@@ -1530,3 +1530,115 @@ button { font-family: inherit; }
         align-items: flex-start;
     }
 }
+
+/* ============================================
+   ADMIN PAGE ENHANCEMENTS
+   ============================================ */
+
+/* Enhanced Sidebar */
+.sidebar {
+    background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
+}
+
+.sidebar-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.nav-link {
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-5px);
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-right: 4px solid white;
+}
+
+/* Enhanced Stat Cards */
+.stat-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-lg);
+    background: var(--gradient-hero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: white;
+}
+
+/* Enhanced Tables */
+.data-table {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.data-table thead {
+    background: var(--color-gray-50);
+}
+
+.data-table th {
+    padding: var(--space-4);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    text-align: right;
+}
+
+.data-table td {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.data-table tr:hover {
+    background: var(--color-gray-50);
+}
+
+/* Enhanced Buttons */
+.admin-body .btn-primary {
+    background: var(--gradient-blue);
+    color: white;
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.admin-body .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 153, 255, 0.3);
+}
+
+.admin-body .btn-secondary {
+    background: var(--color-gray-200);
+    color: var(--color-gray-700);
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.admin-body .btn-secondary:hover {
+    background: var(--color-gray-300);
+}
