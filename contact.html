@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - ElectroTech</title>
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563EB">
+</head>
+
+<body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span class="logo-text">ElectroTech</span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" data-i18n="home">Home</a>
+                <a href="index.html#products" data-i18n="products">Products</a>
+                <a href="contact.html" class="active" data-i18n="contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span data-i18n="langToggle">عربي</span>
+                </button>
+
+                <a href="login.html" class="icon-btn" title="Login">
+                    <i class="fas fa-user"></i>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== BACKGROUND BLOBS ===== -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- ===== CONTACT PAGE ===== -->
+    <section class="contact-page-new">
+        <div class="contact-container-new">
+            <!-- Header -->
+            <div class="contact-header-new">
+                <h1 class="gradient-text" data-i18n="getInTouch">Get In Touch</h1>
+                <p data-i18n="contactDesc">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="contact-grid-new">
+                <!-- Contact Form -->
+                <div class="contact-card-new">
+                    <div class="card-icon-header">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h2 data-i18n="sendUsMessage">Send us a Message</h2>
+                    </div>
+                    
+                    <form id="contactForm" class="contact-form-new">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> <span data-i18n="yourName">Full Name</span></label>
+                                <input type="text" class="form-input" id="contactName" data-i18n-placeholder="namePlaceholder" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> <span data-i18n="yourEmail">Email</span></label>
+                                <input type="email" class="form-input" id="contactEmail" data-i18n-placeholder="emailPlaceholder" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> <span data-i18n="subject">Subject</span></label>
+                            <input type="text" class="form-input" id="contactSubject" data-i18n-placeholder="subjectPlaceholder" placeholder="How can we help?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-comment-dots"></i> <span data-i18n="message">Message</span></label>
+                            <textarea class="form-input" id="contactMessage" rows="6" data-i18n-placeholder="messagePlaceholder" placeholder="Your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn-new">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="sendMessage">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-card-new">
+                    <div class="card-icon-header">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <h2 data-i18n="contactInformation">Contact Information</h2>
+                    </div>
+
+                    <div class="contact-info-list">
+                        <div class="info-item-new">
+                            <div class="info-icon-new">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4 data-i18n="phone">Phone</h4>
+                                <p>+964 770 123 4567</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item-new">
+                            <div class="info-icon-new whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4>WhatsApp</h4>
+                                <p>+964 770 123 4567</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item-new">
+                            <div class="info-icon-new">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4 data-i18n="email">Email</h4>
+                                <p>info@electrotech.iq</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item-new">
+                            <div class="info-icon-new">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4 data-i18n="location">Location</h4>
+                                <p>Baghdad, Iraq</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item-new">
+                            <div class="info-icon-new">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-text">
+                                <h4 data-i18n="businessHours">Business Hours</h4>
+                                <p data-i18n="businessHoursValue">Mon - Fri: 9AM - 6PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-links-new">
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                        <span>ElectroTech</span>
+                    </div>
+                    <p data-i18n="footerDesc">Your trusted partner for premium electronics and cutting-edge technology.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="quickLinks">QUICK LINKS</h4>
+                    <div class="footer-links">
+                        <a href="index.html" data-i18n="home">Home</a>
+                        <a href="index.html#products" data-i18n="products">Products</a>
+                        <a href="contact.html" data-i18n="contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="contactInfo">CONTACT</h4>
+                    <div class="footer-links">
+                        <a href="tel:+9647701234567"><i class="fas fa-phone"></i> +964 770 123 4567</a>
+                        <a href="mailto:info@electrotech.iq"><i class="fas fa-envelope"></i> info@electrotech.iq</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="copyright">&copy; 2025 ElectroTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            initI18n();
+
+            // Mobile menu
+            const toggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (toggle && navLinks) {
+                toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+            }
+
+            // Contact form
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const name = document.getElementById('contactName').value.trim();
+                    const email = document.getElementById('contactEmail').value.trim();
+                    const subject = document.getElementById('contactSubject').value.trim();
+                    const message = document.getElementById('contactMessage').value.trim();
+
+                    if (!name || !email || !subject || !message) {
+                        showContactToast(t('fillAllFields'), 'error');
+                        return;
+                    }
+
+                    if (!email.includes('@') || !email.includes('.')) {
+                        showContactToast(t('invalidEmail'), 'error');
+                        return;
+                    }
+
+                    // Simulate sending
+                    showContactToast(t('messageSent'), 'success');
+                    form.reset();
+                });
+            }
+        });
+
+        function showContactToast(message, type) {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+    </script>
+</body>
+
+</html>

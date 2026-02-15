@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroTech - Modern Electronics Store</title>
+
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563EB">
+</head>
+
+<body>
+    <!-- ===== BACKGROUND BLOBS ===== -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span class="logo-text">ElectroTech</span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="active" data-i18n="home">Home</a>
+                <a href="#products" data-i18n="products">Products</a>
+                <a href="contact.html" data-i18n="contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span data-i18n="langToggle">عربي</span>
+                </button>
+
+                <button class="icon-btn" id="searchBtn" title="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                <button class="icon-btn" id="cartBtn" title="Cart" style="position:relative;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+                </button>
+
+                <a href="login.html" class="icon-btn" id="loginBtn" title="Login">
+                    <i class="fas fa-user"></i>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line" data-i18n="heroTitle1">THE FUTURE OF</span>
+                    <span class="title-line gradient-text" data-i18n="heroTitle2">ELECTRONICS</span>
+                </h1>
+                <p class="hero-description" data-i18n="heroDesc">
+                    Discover cutting-edge technology and premium electronics. Bold design meets powerful performance in every product.
+                </p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn-hero-primary" data-i18n="shopNow">SHOP NOW</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Satellite</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-tv"></i>
+                    <span>TV & Audio</span>
+                </div>
+                <div class="floating-card card-3">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Remotes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3 data-i18n="freeShipping">Free Shipping</h3>
+                <p data-i18n="freeShippingDesc">On orders over $100</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 data-i18n="support247">24/7 Support</h3>
+                <p data-i18n="support247Desc">Always here to help</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 data-i18n="securePayment">Secure Payment</h3>
+                <p data-i18n="securePaymentDesc">100% protected transactions</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-undo-alt"></i>
+                </div>
+                <h3 data-i18n="easyReturns">Easy Returns</h3>
+                <p data-i18n="easyReturnsDesc">30-day return policy</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTS SECTION ===== -->
+    <section class="products-section" id="products">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="featuredProducts">FEATURED PRODUCTS</h2>
+                <p class="section-subtitle" data-i18n="productsSubtitle">Explore our carefully curated collection of premium electronics</p>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="category-filter" id="categoryFilter">
+                <!-- Built dynamically by JS -->
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Built dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER SECTION ===== -->
+    <section class="newsletter-dark">
+        <h2 data-i18n="newsletterTitle">Ready to Get Our New Stuff?</h2>
+        <p data-i18n="newsletterDesc">Subscribe to our newsletter and be the first to know about exclusive deals, new arrivals, and tech insights.</p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" class="newsletter-input" data-i18n-placeholder="emailPlaceholder" placeholder="Enter your email" required>
+            <button type="submit" class="btn-black" data-i18n="subscribe">SUBSCRIBE</button>
+        </form>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                        <span>ElectroTech</span>
+                    </div>
+                    <p data-i18n="footerDesc">Your trusted partner for premium electronics and cutting-edge technology.</p>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="quickLinks">QUICK LINKS</h4>
+                    <div class="footer-links">
+                        <a href="index.html" data-i18n="home">Home</a>
+                        <a href="#products" data-i18n="products">Products</a>
+                        <a href="contact.html" data-i18n="contact">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="contactInfo">CONTACT</h4>
+                    <div class="footer-links">
+                        <a href="tel:+9647701234567"><i class="fas fa-phone"></i> +964 770 123 4567</a>
+                        <a href="mailto:info@electrotech.iq"><i class="fas fa-envelope"></i> info@electrotech.iq</a>
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> Baghdad, Iraq</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-i18n="followUs">FOLLOW US</h4>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="copyright">&copy; 2025 ElectroTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fas fa-shopping-bag"></i> <span data-i18n="shoppingCart">Shopping Cart</span></h2>
+            <button class="close-btn" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- populated dynamically -->
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span data-i18n="total">Total:</span>
+                <span class="cart-total-price" id="cartTotal">$0</span>
+            </div>
+            <button class="btn-hero-primary" style="width:100%;" onclick="checkout()" data-i18n="checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ===== SEARCH OVERLAY ===== -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-modal">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search products...">
+                <button class="close-btn" id="closeSearch"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast-notification" id="toastNotification">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="products-data.js"></script>
+    <script src="i18n.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

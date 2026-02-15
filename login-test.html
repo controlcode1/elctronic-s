@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test - ElectroTech</title>
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Quick diagnostic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="auth-page-dark">
+    <!-- Dark overlay -->
+    <div class="auth-dark-overlay"></div>
+    
+    <div class="auth-dark-container">
+        <!-- Brand Logo -->
+        <div class="auth-brand">
+            <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+            <span class="logo-text">ElectroTech</span>
+        </div>
+
+        <!-- Auth Card -->
+        <div class="auth-card-dark">
+            <div class="auth-header-dark">
+                <p class="auth-label">START FOR FREE</p>
+                <h1>Sign in to your account</h1>
+                <p class="auth-subtitle">
+                    <span>Don't have an account?</span>
+                    <a href="#" class="auth-link">Create Account</a>
+                </p>
+            </div>
+
+            <form class="auth-form-dark">
+                <div class="form-group-dark">
+                    <label><i class="fas fa-envelope"></i> Email or Phone</label>
+                    <input type="text" class="input-underline input-dark" placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group-dark">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" class="input-underline input-dark" placeholder="••••••••">
+                </div>
+
+                <div class="auth-actions-dark">
+                    <button type="button" class="btn-gray">Back to Home</button>
+                    <button type="submit" class="btn-blue">Sign In</button>
+                </div>
+            </form>
+
+            <div class="auth-footer-dark">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    <span>Demo: admin@electrotech.com / admin123</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Language Toggle -->
+        <button class="lang-toggle-dark">
+            <i class="fas fa-globe"></i>
+            <span>عربي</span>
+        </button>
+    </div>
+
+    <script>
+        // Simple test to check if CSS loaded
+        console.log('Test page loaded');
+        const body = document.querySelector('.auth-page-dark');
+        const computed = window.getComputedStyle(body);
+        console.log('Background color:', computed.backgroundColor);
+        console.log('Display:', computed.display);
+    </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ElectroTech</title>
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="theme-color" content="#2563EB">
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3659/3659898.png">
+</head>
+
+<body class="admin-body">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <div class="sidebar-title">
+                <h2>لوحة التحكم</h2>
+                <p>ElectroTech Admin</p>
+            </div>
+        </div>
+
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>لوحة المعلومات</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>إدارة الطلبات</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="products">
+                        <i class="fas fa-box"></i>
+                        <span>إدارة المنتجات</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="customers">
+                        <i class="fas fa-users"></i>
+                        <span>قاعدة العملاء</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-section="messages">
+                        <i class="fas fa-envelope"></i>
+                        <span>رسائل التواصل</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>العودة للمتجر</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>تسجيل الخروج</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header Bar -->
+        <div class="header-bar">
+            <div class="header-title">
+                <h1 id="pageTitle">لوحة المعلومات</h1>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                    طباعة التقرير
+                </button>
+                <button class="btn btn-primary" onclick="exportData()">
+                    <i class="fas fa-download"></i>
+                    تصدير البيانات
+                </button>
+                <!-- Mobile Menu Toggle -->
+                <button class="btn btn-secondary menu-toggle-admin"
+                    onclick="document.getElementById('sidebar').classList.toggle('mobile-open')" style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <section class="content-section active" id="dashboard">
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card orders">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>إجمالي الطلبات</h3>
+                        <div class="stat-value">
+                            <span id="totalOrders">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card revenue">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>إجمالي الإيرادات</h3>
+                        <div class="stat-value">
+                            <span id="totalRevenue">0</span>
+                            <span style="font-size: 16px; color: var(--text-muted);">IQD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card customers">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>عدد العملاء</h3>
+                        <div class="stat-value">
+                            <span id="totalCustomers">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card products">
+                    <div class="stat-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>عدد المنتجات</h3>
+                        <div class="stat-value">
+                            <span id="totalProducts">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h2 class="data-card-title">الطلبات الأخيرة</h2>
+                    <button class="btn btn-primary" onclick="showSection('orders')">
+                        عرض الكل <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div id="recentOrdersTable"></div>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section class="content-section" id="orders">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h2 class="data-card-title">إدارة الطلبات</h2>
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="بحث عن طلب..." id="searchOrders"
+                            onkeyup="filterOrders()">
+                        <select class="form-select search-input"
+                            style="width: auto; background: var(--glass-bg); color: #fff;"
+                            onchange="filterOrdersByStatus(this.value)">
+                            <option value="all">جميع الطلبات</option>
+                            <option value="pending">قيد الانتظار</option>
+                            <option value="processing">قيد المعالجة</option>
+                            <option value="delivered">تم التسليم</option>
+                            <option value="cancelled">ملغي</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="ordersTable"></div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="content-section" id="products">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h2 class="data-card-title">إدارة المنتجات</h2>
+                    <button class="btn btn-primary" onclick="openAddProductModal()">
+                        <i class="fas fa-plus"></i>
+                        إضافة منتج جديد
+                    </button>
+                </div>
+                <div id="productsTable"></div>
+            </div>
+        </section>
+
+        <!-- Customers Section -->
+        <section class="content-section" id="customers">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h2 class="data-card-title">قاعدة بيانات العملاء</h2>
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="بحث عن عميل..." id="searchCustomers"
+                            onkeyup="filterCustomers()">
+                    </div>
+                </div>
+                <div id="customersTable"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">تفاصيل الطلب</h2>
+                <button class="modal-close"
+                    style="background:transparent; border:none; color: var(--text-color); font-size:1.5rem; cursor:pointer;"
+                    onclick="closeModal('orderModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="orderDetails"></div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="productModalTitle">إضافة منتج جديد</h2>
+                <button class="modal-close"
+                    style="background:transparent; border:none; color: var(--text-color); font-size:1.5rem; cursor:pointer;"
+                    onclick="closeModal('productModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="productForm" onsubmit="saveProduct(event)">
+                <input type="hidden" id="productId">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">اسم المنتج</label>
+                    <input type="text" class="form-input" id="productName" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">السعر (IQD)</label>
+                    <input type="number" class="form-input" id="productPrice" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">الفئة</label>
+                    <select class="form-input" id="productCategory" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="satellite">ستلايت</option>
+                        <option value="tv">شاشات</option>
+                        <option value="accessories">ملحقات</option>
+                        <option value="coffee">قهوة</option>
+                        <option value="tea">شاي</option>
+                        <option value="dessert">حلويات</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">الوصف</label>
+                    <textarea class="form-input" id="productDescription" style="min-height: 100px;"></textarea>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">رابط الصورة</label>
+                    <input type="url" class="form-input" id="productImage">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label class="form-label" style="display:block; margin-bottom:5px;">المخزون</label>
+                    <input type="number" class="form-input" id="productStock" value="100">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-save"></i>
+                    حفظ المنتج
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Messages Section -->
+    <section class="content-section" id="messages">
+        <div class="data-card">
+            <div class="data-card-header">
+                <h2 class="data-card-title">رسائل التواصل</h2>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" class="search-input" id="searchMessages" placeholder="بحث في الرسائل...">
+                    <button class="btn btn-secondary" onclick="clearAllMessages()">
+                        <i class="fas fa-trash"></i>
+                        حذف الكل
+                    </button>
+                </div>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>الحالة</th>
+                        <th>الرسالة</th>
+                        <th>الموضوع</th>
+                        <th>البريد</th>
+                        <th>الاسم</th>
+                        <th>التاريخ</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody id="messagesTableBody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"
+        style="position: fixed; bottom: 20px; right: 20px; background: var(--accent-color); color: #000; padding: 10px 20px; border-radius: 10px; display: none; align-items: center; gap: 10px; z-index: 9999;">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">تمت العملية بنجاح</span>
+    </div>
+    <style>
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile overrides for toggle */
+        @media (max-width: 768px) {
+            .menu-toggle-admin {
+                display: inline-flex !important;
+            }
+        }
+    </style>
+
+    <script src="i18n.js"></script>
+    <script>
+        // Auth guard - redirect if not admin
+        (function() {
+            const user = JSON.parse(localStorage.getItem('electro_current_user'));
+            if (!user || user.role !== 'admin') {
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

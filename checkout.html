@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ElectroTech</title>
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563EB">
+</head>
+
+<body>
+    <!-- ===== BACKGROUND BLOBS ===== -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span class="logo-text">ElectroTech</span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" data-i18n="home">Home</a>
+                <a href="index.html#products" data-i18n="products">Products</a>
+                <a href="contact.html" data-i18n="contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i>
+                    <span data-i18n="langToggle">عربي</span>
+                </button>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== CHECKOUT SECTION ===== -->
+    <section class="checkout-section">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1 data-i18n="checkoutTitle">Complete Your Order</h1>
+                <p data-i18n="checkoutSubtitle">Fill in your information to finalize the purchase</p>
+            </div>
+
+            <div class="checkout-grid">
+                <!-- Customer Information Form -->
+                <div class="checkout-form-card">
+                    <h2 data-i18n="customerInfo">Customer Information</h2>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label for="customerName" data-i18n="fullName">Full Name</label>
+                            <input type="text" id="customerName" class="form-input" 
+                                   data-i18n-placeholder="namePlaceholder" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerEmail" data-i18n="emailAddress">Email Address</label>
+                            <input type="email" id="customerEmail" class="form-input" 
+                                   data-i18n-placeholder="emailPlaceholder" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerPhone" data-i18n="phoneNumber">Phone Number</label>
+                            <input type="tel" id="customerPhone" class="form-input" 
+                                   placeholder="+1 234 567 8900" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerAddress" data-i18n="address">Delivery Address</label>
+                            <textarea id="customerAddress" class="form-input" rows="3" 
+                                      data-i18n-placeholder="addressPlaceholder" 
+                                      placeholder="Enter your complete delivery address" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="orderNotes" data-i18n="orderNotes">Order Notes (Optional)</label>
+                            <textarea id="orderNotes" class="form-input" rows="2" 
+                                      data-i18n-placeholder="notesPlaceholder" 
+                                      placeholder="Any special instructions?"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-card">
+                    <h2 data-i18n="orderSummary">Order Summary</h2>
+                    <div id="orderItems" class="order-items">
+                        <!-- Items will be loaded here by JavaScript -->
+                    </div>
+
+                    <div class="order-totals">
+                        <div class="total-row">
+                            <span data-i18n="subtotal">Subtotal:</span>
+                            <span id="subtotalAmount">$0</span>
+                        </div>
+                        <div class="total-row">
+                            <span data-i18n="shipping">Shipping:</span>
+                            <span id="shippingAmount">$10</span>
+                        </div>
+                        <div class="total-row total-final">
+                            <span data-i18n="total">Total:</span>
+                            <span id="totalAmount">$10</span>
+                        </div>
+                    </div>
+
+                    <div class="checkout-actions">
+                        <a href="index.html#products" class="btn-secondary" data-i18n="backToCart">
+                            <i class="fas fa-arrow-left"></i> Edit Cart
+                        </a>
+                        <button type="button" class="btn-primary" id="placeOrderBtn" data-i18n="placeOrder">
+                            Place Order <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SUCCESS MODAL ===== -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 data-i18n="orderPlaced">Order Placed Successfully!</h2>
+            <p data-i18n="orderConfirmation">Thank you for your purchase. We'll send you a confirmation email shortly.</p>
+            <p class="order-number">Order #<span id="orderNumber">12345</span></p>
+            <button class="btn-primary" onclick="window.location.href='index.html'" data-i18n="continueShop">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast-notification" id="toastNotification">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="products-data.js"></script>
+    <script src="i18n.js"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

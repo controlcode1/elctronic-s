@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ElectroTech</title>
+    <link rel="stylesheet" href="bold-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563EB">
+</head>
+
+<body class="auth-page-dark">
+    <!-- ===== DARK AUTH PAGE ===== -->
+    <div class="auth-dark-overlay"></div>
+    
+    <div class="auth-dark-container">
+        <!-- Logo/Brand -->
+        <div class="auth-brand">
+            <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+            <span class="logo-text">ElectroTech</span>
+        </div>
+
+        <!-- Auth Card -->
+        <div class="auth-card-dark">
+            <div class="auth-header-dark">
+                <p class="auth-label" data-i18n="startForFree">START FOR FREE</p>
+                <h1 data-i18n="signInTitle">Sign in to your account</h1>
+                <p class="auth-subtitle">
+                    <span data-i18n="noAccount">Don't have an account?</span>
+                    <a href="signup.html" class="auth-link" data-i18n="createAccount">Create Account</a>
+                </p>
+            </div>
+
+            <div class="auth-error" id="loginError">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="loginErrorMsg" data-i18n="loginError">Invalid credentials. Please try again.</span>
+            </div>
+
+            <form id="loginForm" class="auth-form-dark">
+                <div class="form-group-dark">
+                    <label><i class="fas fa-envelope"></i> <span data-i18n="emailOrPhoneLabel">Email or Phone Number</span></label>
+                    <input type="text" class="input-underline input-dark" id="loginEmail" data-i18n-placeholder="emailOrPhonePlaceholder" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group-dark">
+                    <label><i class="fas fa-lock"></i> <span data-i18n="password">Password</span></label>
+                    <input type="password" class="input-underline input-dark" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <div class="auth-actions-dark">
+                    <button type="button" class="btn-gray" onclick="window.location.href='index.html'" data-i18n="backToHome">Back to Home</button>
+                    <button type="submit" class="btn-blue" data-i18n="signIn">Sign In</button>
+                </div>
+            </form>
+
+            <div class="auth-footer-dark">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    <span data-i18n="demoCredentials">Demo: admin@electrotech.com / admin123</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Language Toggle (Bottom Right) -->
+        <button class="lang-toggle-dark" id="langToggleBtn" onclick="toggleLanguage()">
+            <i class="fas fa-globe"></i>
+            <span data-i18n="langToggle">عربي</span>
+        </button>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            initI18n();
+
+            // If already logged in, redirect
+            const currentUser = JSON.parse(localStorage.getItem('electro_current_user'));
+            if (currentUser) {
+                window.location.href = currentUser.role === 'admin' ? 'admin.html' : 'index.html';
+                return;
+            }
+
+            const auth = new Auth();
+
+            // Ensure default admin account exists
+            const users = auth.getUsers();
+            if (!users.find(u => u.email === 'admin@electrotech.com')) {
+                const adminUsers = [...users, {
+                    id: 1,
+                    name: 'Admin',
+                    email: 'admin@electrotech.com',
+                    phone: '07700000000',
+                    password: 'admin123',
+                    role: 'admin'
+                }];
+                localStorage.setItem(auth.usersKey, JSON.stringify(adminUsers));
+            }
+
+            // Login form
+            const form = document.getElementById('loginForm');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+
+                const result = auth.login(email, password);
+                if (result.success) {
+                    const allUsers = auth.getUsers();
+                    const user = allUsers.find(u => u.email === email);
+                    const userData = {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role || 'user',
+                        isLoggedIn: true
+                    };
+                    localStorage.setItem('electro_current_user', JSON.stringify(userData));
+
+                    // Redirect based on role
+                    if (userData.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                } else {
+                    const errorBox = document.getElementById('loginError');
+                    errorBox.classList.add('show');
+                    setTimeout(() => errorBox.classList.remove('show'), 4000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
