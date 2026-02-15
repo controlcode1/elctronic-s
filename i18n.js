@@ -14,10 +14,15 @@ const TRANSLATIONS = {
         logout: "Logout",
 
         // Hero
-        heroTitle1: "THE FUTURE OF",
-        heroTitle2: "ELECTRONICS",
-        heroDesc: "Discover cutting-edge technology and premium electronics. Bold design meets powerful performance in every product.",
-        shopNow: "SHOP NOW",
+        heroTitle1: "Premium Electronics",
+        heroTitle2: "For Modern Living",
+        heroDesc: "Discover cutting-edge technology and premium electronics. Bold design meets powerful performance.",
+        shopNow: "Shop Now",
+        viewCategories: "View Categories",
+        trendingNow: "Trending This Week",
+        productsAvailable: "Products",
+        customerRating: "Rating",
+        from: "From",
 
         // Features
         freeShipping: "Free Shipping",
@@ -25,11 +30,29 @@ const TRANSLATIONS = {
         support247: "24/7 Support",
         support247Desc: "Always here to help",
         securePayment: "Secure Payment",
-        securePaymentDesc: "100% protected transactions",
+        securePaymentDesc: "100% protected",
         easyReturns: "Easy Returns",
         easyReturnsDesc: "30-day return policy",
 
         watchDemo: "WATCH DEMO",
+
+        // Categories & Sections
+        browseByCategory: "Browse by Category",
+        tvAudio: "TV & Audio",
+        remotes: "Remotes",
+        exploreProducts: "Explore our Products",
+        ourProducts: "Our Products",
+        curatedForYou: "Curated for You",
+        viewAllProducts: "View All Products",
+
+        // Promo
+        specialOffer: "Special Offer",
+        promoTitle: "Enhance Your Entertainment Experience",
+        checkItOut: "Check it Out",
+        days: "Days",
+        hours: "Hrs",
+        minutes: "Min",
+        seconds: "Sec",
 
         // Products section
         featuredProducts: "FEATURED PRODUCTS",
@@ -155,10 +178,15 @@ const TRANSLATIONS = {
         logout: "تسجيل الخروج",
 
         // Hero
-        heroTitle1: "مستقبل",
-        heroTitle2: "الإلكترونيات",
-        heroDesc: "اكتشف أحدث التقنيات والإلكترونيات الفاخرة. تصميم جريء يلتقي بالأداء القوي في كل منتج.",
+        heroTitle1: "إلكترونيات فاخرة",
+        heroTitle2: "لحياة عصرية",
+        heroDesc: "اكتشف أحدث التقنيات والإلكترونيات المميزة. تصميم عصري يلتقي بالأداء القوي.",
         shopNow: "تسوق الآن",
+        viewCategories: "تصفح الفئات",
+        trendingNow: "الأكثر رواجاً هذا الأسبوع",
+        productsAvailable: "منتج",
+        customerRating: "تقييم",
+        from: "من",
 
         // Features
         freeShipping: "شحن مجاني",
@@ -166,11 +194,29 @@ const TRANSLATIONS = {
         support247: "دعم 24/7",
         support247Desc: "دائماً هنا لمساعدتك",
         securePayment: "دفع آمن",
-        securePaymentDesc: "معاملات محمية 100%",
+        securePaymentDesc: "محمي 100%",
         easyReturns: "إرجاع سهل",
         easyReturnsDesc: "سياسة إرجاع لمدة 30 يوماً",
 
         watchDemo: "شاهد العرض",
+
+        // Categories & Sections
+        browseByCategory: "تصفح حسب الفئة",
+        tvAudio: "شاشات وصوتيات",
+        remotes: "ريموتات",
+        exploreProducts: "استكشف منتجاتنا",
+        ourProducts: "منتجاتنا",
+        curatedForYou: "مختار لك",
+        viewAllProducts: "عرض كل المنتجات",
+
+        // Promo
+        specialOffer: "عرض خاص",
+        promoTitle: "عزز تجربة الترفيه الخاصة بك",
+        checkItOut: "تحقق من العرض",
+        days: "يوم",
+        hours: "ساعة",
+        minutes: "دقيقة",
+        seconds: "ثانية",
 
         // Products section
         featuredProducts: "المنتجات المميزة",

@@ -62,147 +62,178 @@
     </nav>
 
     <!-- ===== HERO SECTION ===== -->
-    <section class="hero" id="hero">
-        <div class="hero-grid">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-line" data-i18n="heroTitle1">THE FUTURE OF</span>
-                    <span class="title-line gradient-text" data-i18n="heroTitle2">ELECTRONICS</span>
-                </h1>
-                <p class="hero-description" data-i18n="heroDesc">
-                    Discover cutting-edge technology and premium electronics. Bold design meets powerful performance in every product.
-                </p>
-                <div class="hero-actions">
-                    <a href="#products" class="btn-hero-primary" data-i18n="shopNow">SHOP NOW</a>
+    <section class="hero-v2" id="hero">
+        <div class="hero-v2-container">
+            <div class="hero-v2-content">
+                <span class="hero-badge"><i class="fas fa-fire"></i> <span data-i18n="trendingNow">Trending This Week</span></span>
+                <h1 class="hero-v2-title" data-i18n="heroTitle1">Premium Electronics</h1>
+                <h1 class="hero-v2-title hero-gradient" data-i18n="heroTitle2">For Modern Living</h1>
+                <p class="hero-v2-desc" data-i18n="heroDesc">Discover cutting-edge technology and premium electronics. Bold design meets powerful performance.</p>
+                <div class="hero-v2-actions">
+                    <a href="#products" class="btn-hero-shop"><i class="fas fa-shopping-bag"></i> <span data-i18n="shopNow">Shop Now</span></a>
+                    <a href="#categories" class="btn-hero-outline"><span data-i18n="viewCategories">View Categories</span></a>
+                </div>
+                <div class="hero-v2-stats">
+                    <div class="hero-stat">
+                        <strong>500+</strong>
+                        <span data-i18n="productsAvailable">Products</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>24/7</strong>
+                        <span data-i18n="support247">Support</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>4.8★</strong>
+                        <span data-i18n="customerRating">Rating</span>
+                    </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <i class="fas fa-satellite-dish"></i>
-                    <span>Satellite</span>
-                </div>
-                <div class="floating-card card-2">
-                    <i class="fas fa-tv"></i>
-                    <span>TV & Audio</span>
-                </div>
-                <div class="floating-card card-3">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Remotes</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FEATURES SECTION ===== -->
-    <section class="features-section">
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-                <h3 data-i18n="freeShipping">Free Shipping</h3>
-                <p data-i18n="freeShippingDesc">On orders over $100</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3 data-i18n="support247">24/7 Support</h3>
-                <p data-i18n="support247Desc">Always here to help</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h3 data-i18n="securePayment">Secure Payment</h3>
-                <p data-i18n="securePaymentDesc">100% protected transactions</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-undo-alt"></i>
-                </div>
-                <h3 data-i18n="easyReturns">Easy Returns</h3>
-                <p data-i18n="easyReturnsDesc">30-day return policy</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PRODUCTS SECTION WITH SIDEBAR ===== -->
-    <section class="products-section" id="products">
-        <div class="products-container">
-            <!-- Category Sidebar -->
-            <aside class="category-sidebar">
-                <h3 data-i18n="categories">Categories</h3>
-                <div class="category-list">
-                    <button class="category-item active" data-category="all" onclick="filterCategory('all')">
-                        <i class="fas fa-th"></i>
-                        <span data-i18n="allProducts">All Products</span>
-                    </button>
-                    <button class="category-item" data-category="phones" onclick="filterCategory('phones')">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span data-i18n="smartphones">Smartphones</span>
-                    </button>
-                    <button class="category-item" data-category="laptops" onclick="filterCategory('laptops')">
-                        <i class="fas fa-laptop"></i>
-                        <span data-i18n="laptops">Laptops</span>
-                    </button>
-                    <button class="category-item" data-category="accessories" onclick="filterCategory('accessories')">
-                        <i class="fas fa-headphones"></i>
-                        <span data-i18n="accessories">Accessories</span>
-                    </button>
-                    <button class="category-item" data-category="tablets" onclick="filterCategory('tablets')">
-                        <i class="fas fa-tablet-alt"></i>
-                        <span data-i18n="tablets">Tablets</span>
-                    </button>
-                </div>
-            </aside>
-
-            <!-- Products Grid -->
-            <div class="products-main">
-                <div class="products-header">
-                    <h2 data-i18n="featuredProducts">FEATURED PRODUCTS</h2>
-                    <div class="category-filter" id="categoryFilter"></div>
-                </div>
-                <div class="products-grid" id="productsGrid">
-                    <!-- Products will be rendered here by JavaScript -->
+            <div class="hero-v2-visual">
+                <div class="hero-product-showcase">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600" alt="Featured Product" class="hero-product-img">
+                    <div class="hero-price-badge">
+                        <span class="price-from" data-i18n="from">From</span>
+                        <span class="price-amount">$199</span>
+                    </div>
+                    <div class="hero-rating-badge">
+                        <i class="fas fa-star"></i> 4.8
+                        <span class="review-count">120+ reviews</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== RECOMMENDED PRODUCTS CAROUSEL ===== -->
-    <section class="carousel-section">
-        <div class="carousel-container">
-            <div class="carousel-header">
-                <h2 data-i18n="recommendedForYou">Recommended For You</h2>
-                <div class="carousel-controls">
-                    <button class="carousel-btn prev" onclick="carouselPrev()">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="carousel-btn next" onclick="carouselNext()">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+    <!-- ===== FEATURES BAR ===== -->
+    <section class="features-bar">
+        <div class="features-bar-grid">
+            <div class="feature-bar-item">
+                <div class="feature-bar-icon"><i class="fas fa-shipping-fast"></i></div>
+                <div class="feature-bar-text">
+                    <h4 data-i18n="freeShipping">Free Shipping</h4>
+                    <p data-i18n="freeShippingDesc">On orders over $100</p>
                 </div>
             </div>
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="carouselTrack">
+            <div class="feature-bar-item">
+                <div class="feature-bar-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="feature-bar-text">
+                    <h4 data-i18n="securePayment">Secure Payment</h4>
+                    <p data-i18n="securePaymentDesc">100% protected</p>
                 </div>
+            </div>
+            <div class="feature-bar-item">
+                <div class="feature-bar-icon"><i class="fas fa-undo-alt"></i></div>
+                <div class="feature-bar-text">
+                    <h4 data-i18n="easyReturns">Easy Returns</h4>
+                    <p data-i18n="easyReturnsDesc">30-day return policy</p>
+                </div>
+            </div>
+            <div class="feature-bar-item">
+                <div class="feature-bar-icon"><i class="fas fa-headset"></i></div>
+                <div class="feature-bar-text">
+                    <h4 data-i18n="support247">24/7 Support</h4>
+                    <p data-i18n="support247Desc">Always here to help</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BROWSE BY CATEGORY ===== -->
+    <section class="category-circles-section" id="categories">
+        <div class="section-header-v2">
+            <span class="section-label"><i class="fas fa-th-large"></i> <span data-i18n="categories">Categories</span></span>
+            <h2 class="section-title-v2" data-i18n="browseByCategory">Browse by Category</h2>
+        </div>
+        <div class="category-circles-grid">
+            <button class="category-circle active" data-category="all" onclick="filterCategory('all')">
+                <div class="circle-icon"><i class="fas fa-th"></i></div>
+                <span data-i18n="allProducts">All</span>
+            </button>
+            <button class="category-circle" data-category="satellite" onclick="filterCategory('satellite')">
+                <div class="circle-icon"><i class="fas fa-satellite-dish"></i></div>
+                <span data-i18n="satellite">Satellite</span>
+            </button>
+            <button class="category-circle" data-category="tv-audio" onclick="filterCategory('tv-audio')">
+                <div class="circle-icon"><i class="fas fa-tv"></i></div>
+                <span data-i18n="tvAudio">TV & Audio</span>
+            </button>
+            <button class="category-circle" data-category="accessories" onclick="filterCategory('accessories')">
+                <div class="circle-icon"><i class="fas fa-headphones"></i></div>
+                <span data-i18n="accessories">Accessories</span>
+            </button>
+            <button class="category-circle" data-category="remote" onclick="filterCategory('remote')">
+                <div class="circle-icon"><i class="fas fa-gamepad"></i></div>
+                <span data-i18n="remotes">Remotes</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== PROMO BANNER ===== -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <span class="promo-label"><i class="fas fa-bolt"></i> <span data-i18n="specialOffer">Special Offer</span></span>
+            <h2 class="promo-title" data-i18n="promoTitle">Enhance Your<br>Entertainment Experience</h2>
+            <div class="promo-countdown">
+                <div class="countdown-item"><span class="cd-num">15</span><span class="cd-label" data-i18n="days">Days</span></div>
+                <div class="countdown-item"><span class="cd-num">10</span><span class="cd-label" data-i18n="hours">Hrs</span></div>
+                <div class="countdown-item"><span class="cd-num">56</span><span class="cd-label" data-i18n="minutes">Min</span></div>
+                <div class="countdown-item"><span class="cd-num">54</span><span class="cd-label" data-i18n="seconds">Sec</span></div>
+            </div>
+            <a href="#products" class="btn-promo" data-i18n="checkItOut">Check it Out</a>
+        </div>
+        <div class="promo-visual">
+            <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" alt="Promo Product">
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTS SECTION ===== -->
+    <section class="products-section-v2" id="products">
+        <div class="section-header-v2">
+            <span class="section-label"><i class="fas fa-star"></i> <span data-i18n="ourProducts">Our Products</span></span>
+            <h2 class="section-title-v2" data-i18n="exploreProducts">Explore our Products</h2>
+        </div>
+        <div class="products-filter-tabs" id="categoryFilter">
+            <!-- Rendered by JS -->
+        </div>
+        <div class="products-grid-v2" id="productsGrid">
+            <!-- Products rendered by JS -->
+        </div>
+        <div class="products-viewall">
+            <a href="#products" class="btn-viewall" data-i18n="viewAllProducts">View All Products</a>
+        </div>
+    </section>
+
+    <!-- ===== RECOMMENDED CAROUSEL V2 ===== -->
+    <section class="carousel-section-v2">
+        <div class="carousel-header">
+            <div>
+                <span class="section-label"><i class="fas fa-heart"></i> <span data-i18n="curatedForYou">Curated for You</span></span>
+                <h2 class="section-title-v2" data-i18n="trendingNow">Trending Now</h2>
+            </div>
+            <div class="carousel-controls-v2">
+                <button class="btn-carousel-v2" onclick="carouselPrev()"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-carousel-v2" onclick="carouselNext()"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <div class="carousel-container-v2">
+            <div class="carousel-track-v2" id="carouselTrack">
+                <!-- Items rendered by JS -->
             </div>
         </div>
     </section>
 
     <!-- ===== NEWSLETTER SECTION ===== -->
-    <section class="newsletter-dark">
-        <h2 data-i18n="newsletterTitle">Ready to Get Our New Stuff?</h2>
-        <p data-i18n="newsletterDesc">Subscribe to our newsletter and be the first to know about exclusive deals, new arrivals, and tech insights.</p>
-        <form class="newsletter-form" id="newsletterForm">
-            <input type="email" class="newsletter-input" data-i18n-placeholder="emailPlaceholder" placeholder="Enter your email" required>
-            <button type="submit" class="btn-black" data-i18n="subscribe">SUBSCRIBE</button>
-        </form>
+    <section class="newsletter-v2">
+        <div class="newsletter-v2-content">
+            <h2 data-i18n="newsletterTitle">Ready to Get Our New Stuff?</h2>
+            <p data-i18n="newsletterDesc">Subscribe to our newsletter and be the first to know about exclusive deals, new arrivals, and tech insights.</p>
+            <form class="newsletter-v2-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" name="email" autocomplete="email" data-i18n-placeholder="emailPlaceholder" placeholder="Enter your email" required>
+                <button type="submit" data-i18n="subscribe">SUBSCRIBE</button>
+            </form>
+        </div>
     </section>
+
 
 
     <!-- ===== FOOTER ===== -->

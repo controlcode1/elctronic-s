@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
+            const email = document.getElementById('newsletterEmail').value;
             if (email && email.includes('@')) {
                 showToast('✨ ' + t('newsletterSuccess') || 'Successfully subscribed to our newsletter!', 'success');
                 this.reset();
@@ -217,28 +217,19 @@ function buildCategoryFilter() {
     const lang = getLanguage();
     container.innerHTML = CATEGORIES.map(cat => {
         const label = lang === 'ar' ? cat.labelAr : cat.label;
-        return `<button class="category-pill${cat.id === currentCategory ? ' active' : ''}"
+        return `<button class="filter-tab${cat.id === currentCategory ? ' active' : ''}"
                     data-category="${cat.id}" onclick="filterCategory('${cat.id}')">${label}</button>`;
     }).join('');
 }
 
 function filterCategory(categoryId) {
     currentCategory = categoryId;
-    
-    // Update sidebar buttons
-    document.querySelectorAll('.category-item').forEach(item => {
-        if (item.dataset.category === categoryId) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
+    document.querySelectorAll('.category-circle').forEach(item => {
+        item.classList.toggle('active', item.dataset.category === categoryId);
     });
-    
-    // Update pills if exist
-    document.querySelectorAll('.category-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.dataset.category === categoryId);
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.category === categoryId);
     });
-    
     buildProductCards();
 }
 
@@ -252,110 +243,96 @@ function buildProductCards() {
         : PRODUCTS.filter(p => p.category === currentCategory);
 
     if (filtered.length === 0) {
-        grid.innerHTML = `<p style="text-align:center; color: var(--color-gray-500); grid-column:1/-1;">${t('noResults')}</p>`;
+        grid.innerHTML = `<p style="text-align:center; color: var(--color-gray-500); grid-column:1/-1;">${t('noResults') || 'No products found'}</p>`;
         return;
     }
 
     grid.innerHTML = filtered.map(product => {
         const title = lang === 'ar' ? product.titleAr : product.title;
-        const desc = lang === 'ar' ? product.descriptionAr : product.description;
-        
-        // Badge
-        let badgeHTML = '';
-        if (product.label) {
-            const labelText = product.label === 'new' ? 'NEW' : 
-                            product.label === 'sale' ? 'SALE' : 
-                            product.label === 'hot' ? 'HOT' : '';
-            badgeHTML = `<div class="product-badge badge-${product.label}">${labelText}</div>`;
-        }
-        
-        // Star Rating
-        const fullStars = Math.floor(product.rating);
-        const hasHalfStar = product.rating % 1 >= 0.5;
-        let starsHTML = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < fullStars) {
-                starsHTML += '<i class="fas fa-star star"></i>';
-            } else if (i === fullStars && hasHalfStar) {
-                starsHTML += '<i class="fas fa-star-half-alt star"></i>';
-            } else {
-                starsHTML += '<i class="far fa-star star empty"></i>';
-            }
-        }
-        const ratingHTML = `
-            <div class="star-rating">
-                ${starsHTML}
-                <span class="rating-number">${product.rating}</span>
-            </div>`;
-        
-        // Color Selector
-        const colorsHTML = product.colors && product.colors.length > 0 ? `
-            <div class="color-selector">
-                ${product.colors.map((color, idx) => 
-                    `<div class="color-dot ${idx === 0 ? 'active' : ''}" 
-                          style="background-color: ${color};" 
-                          data-product-id="${product.id}" 
-                          data-color="${color}"></div>`
-                ).join('')}
-            </div>` : '';
-        
-        // Price with discount
+        const catObj = (CATEGORIES || []).find(c => c.id === product.category) || {};
+        const catName = lang === 'ar' ? (catObj.labelAr || '') : (catObj.label || '');
+
+        // Discount badge or label
         const hasDiscount = product.discount > 0;
-        const discountedPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(0) : product.price;
-        const priceHTML = hasDiscount ? `
-            <div class="product-price-box">
-                <span class="product-price">$${discountedPrice}</span>
-                <span class="product-price-old">$${product.price}</span>
-                <span class="discount-tag">-${product.discount}%</span>
-            </div>` : `
-            <div class="product-price-box">
-                <span class="product-price">$${product.price}</span>
-            </div>`;
-        
+        let badgeHTML = '';
+        if (hasDiscount) {
+            badgeHTML = `<span class="discount-badge">-${product.discount}% OFF</span>`;
+        } else if (product.label) {
+            const bgMap = { 'new': '#10b981', 'hot': '#f59e0b', 'sale': '#ef4444' };
+            badgeHTML = `<span class="discount-badge" style="background:${bgMap[product.label] || '#6366f1'}">${product.label.toUpperCase()}</span>`;
+        }
+
+        // Stars
+        const full = Math.floor(product.rating);
+        const half = product.rating % 1 >= 0.5;
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < full) stars += '<i class="fas fa-star"></i>';
+            else if (i === full && half) stars += '<i class="fas fa-star-half-alt"></i>';
+            else stars += '<i class="far fa-star"></i>';
+        }
+
+        // Colors
+        const colorsHTML = product.colors && product.colors.length > 0 ? `
+            <div class="card-colors">
+                ${product.colors.map(c => `<span class="color-dot" style="background:${c}"></span>`).join('')}
+            </div>` : '';
+
+        // Price
+        const dp = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(0) : product.price;
+        const priceHTML = hasDiscount
+            ? `<div class="card-price"><span class="current-price">$${dp}</span><span class="old-price">$${product.price}</span></div>`
+            : `<div class="card-price"><span class="current-price">$${product.price}</span></div>`;
+
         return `
-        <div class="product-card fade-in" data-product-id="${product.id}">
-            ${badgeHTML}
-            <div class="product-image">
+        <div class="product-card-v2 fade-in" data-product-id="${product.id}">
+            <div class="card-image">
+                ${badgeHTML}
+                <button class="wishlist-btn" onclick="toggleWishlist(this,event)"><i class="far fa-heart"></i></button>
                 <img src="${product.image}" alt="${title}" loading="lazy"
-                     onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=No+Image'">
+                     onerror="this.src='https://placehold.co/400x400/f1f5f9/64748b?text=No+Image'">
             </div>
-            <div class="product-info">
-                <h3 class="product-name">${title}</h3>
-                <p class="product-description">${desc}</p>
-                ${ratingHTML}
-                ${colorsHTML}
-                <div class="product-footer">
-                    ${priceHTML}
-                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})" data-i18n="addToCart">${t('addToCart')}</button>
+            <div class="card-body">
+                <div class="card-category">${catName}</div>
+                <h3 class="card-title">${title}</h3>
+                <div class="card-rating">
+                    <span class="stars">${stars}</span>
+                    <span class="rating-count">(${product.rating})</span>
                 </div>
+                ${colorsHTML}
+                ${priceHTML}
+                <button class="card-add-btn" onclick="addToCart(${product.id})">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span data-i18n="addToCart">${t('addToCart') || 'Add to Cart'}</span>
+                </button>
             </div>
         </div>`;
     }).join('');
 
-    // Apply fade-in
     requestAnimationFrame(() => {
         grid.querySelectorAll('.fade-in').forEach((card, i) => {
             setTimeout(() => card.classList.add('visible'), i * 80);
         });
     });
-    
-    // Initialize color selector interaction
-    initColorSelectors();
 }
 
-// Color selector interaction
-function initColorSelectors() {
-    document.querySelectorAll('.color-dot').forEach(dot => {
-        dot.addEventListener('click', function() {
-            const productId = this.dataset.productId;
-            // Remove active class from siblings
-            const siblings = this.parentElement.querySelectorAll('.color-dot');
-            siblings.forEach(s => s.classList.remove('active'));
-            // Add active to clicked
-            this.classList.add('active');
-        });
-    });
+// Wishlist toggle
+function toggleWishlist(btn, e) {
+    e.stopPropagation();
+    btn.classList.toggle('active');
+    const icon = btn.querySelector('i');
+    if (btn.classList.contains('active')) {
+        icon.className = 'fas fa-heart';
+        showToast('Added to wishlist ❤️', 'success');
+    } else {
+        icon.className = 'far fa-heart';
+    }
 }
+
+// Color selector (backward compat)
+function initColorSelectors() {}
+
+
 
 
 // ============================================
@@ -555,43 +532,62 @@ function buildCarousel() {
     if (!track || typeof PRODUCTS === 'undefined') return;
 
     const lang = getLanguage();
-    const recommended = PRODUCTS.slice(0, 6);
+    const recommended = PRODUCTS.slice(0, 8);
     
     track.innerHTML = recommended.map(product => {
         const title = lang === 'ar' ? product.titleAr : product.title;
+        const catObj = (CATEGORIES || []).find(c => c.id === product.category) || {};
+        const catName = lang === 'ar' ? (catObj.labelAr || '') : (catObj.label || '');
+
         const hasDiscount = product.discount > 0;
-        const discountedPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(0) : product.price;
-        
         let badgeHTML = '';
-        if (product.label) {
-            const labelText = product.label === 'new' ? 'NEW' : 
-                            product.label === 'sale' ? 'SALE' : 
-                            product.label === 'hot' ? 'HOT' : '';
-            badgeHTML = `<div class="product-badge badge-${product.label}">${labelText}</div>`;
+        if (hasDiscount) {
+            badgeHTML = `<span class="discount-badge">-${product.discount}%</span>`;
+        } else if (product.label) {
+            badgeHTML = `<span class="discount-badge">${product.label.toUpperCase()}</span>`;
         }
-        
+
+        const full = Math.floor(product.rating);
+        const half = product.rating % 1 >= 0.5;
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < full) stars += '<i class="fas fa-star"></i>';
+            else if (i === full && half) stars += '<i class="fas fa-star-half-alt"></i>';
+            else stars += '<i class="far fa-star"></i>';
+        }
+
+        const dp = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(0) : product.price;
+        const priceHTML = hasDiscount
+            ? `<div class="card-price"><span class="current-price">$${dp}</span><span class="old-price">$${product.price}</span></div>`
+            : `<div class="card-price"><span class="current-price">$${product.price}</span></div>`;
+
         return `
-        <div class="carousel-item">
-            <div class="product-card">
-                ${badgeHTML}
-                <div class="product-image">
+        <div class="carousel-item-v2">
+            <div class="product-card-v2">
+                <div class="card-image">
+                    ${badgeHTML}
+                    <button class="wishlist-btn" onclick="toggleWishlist(this,event)"><i class="far fa-heart"></i></button>
                     <img src="${product.image}" alt="${title}" loading="lazy"
-                         onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=No+Image'">
+                         onerror="this.src='https://placehold.co/400x400/f1f5f9/64748b?text=No+Image'">
                 </div>
-                <div class="product-info">
-                    <h3 class="product-name">${title}</h3>
-                    <div class="product-footer">
-                        <div class="product-price-box">
-                            <span class="product-price">$${hasDiscount ? discountedPrice : product.price}</span>
-                            ${hasDiscount ? `<span class="product-price-old">$${product.price}</span>` : ''}
-                        </div>
-                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">${t('addToCart')}</button>
+                <div class="card-body">
+                    <div class="card-category">${catName}</div>
+                    <h3 class="card-title">${title}</h3>
+                    <div class="card-rating">
+                        <span class="stars">${stars}</span>
+                        <span class="rating-count">(${product.rating})</span>
                     </div>
+                    ${priceHTML}
+                    <button class="card-add-btn" onclick="addToCart(${product.id})">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span data-i18n="addToCart">${t('addToCart')}</span>
+                    </button>
                 </div>
             </div>
         </div>`;
     }).join('');
 }
+
 
 function carouselNext() {
     const track = document.getElementById('carouselTrack');
