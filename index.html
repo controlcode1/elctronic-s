@@ -130,22 +130,66 @@
         </div>
     </section>
 
-    <!-- ===== PRODUCTS SECTION ===== -->
+    <!-- ===== PRODUCTS SECTION WITH SIDEBAR ===== -->
     <section class="products-section" id="products">
-        <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="featuredProducts">FEATURED PRODUCTS</h2>
-                <p class="section-subtitle" data-i18n="productsSubtitle">Explore our carefully curated collection of premium electronics</p>
-            </div>
-
-            <!-- Category Filter -->
-            <div class="category-filter" id="categoryFilter">
-                <!-- Built dynamically by JS -->
-            </div>
+        <div class="products-container">
+            <!-- Category Sidebar -->
+            <aside class="category-sidebar">
+                <h3 data-i18n="categories">Categories</h3>
+                <div class="category-list">
+                    <button class="category-item active" data-category="all" onclick="filterCategory('all')">
+                        <i class="fas fa-th"></i>
+                        <span data-i18n="allProducts">All Products</span>
+                    </button>
+                    <button class="category-item" data-category="phones" onclick="filterCategory('phones')">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span data-i18n="smartphones">Smartphones</span>
+                    </button>
+                    <button class="category-item" data-category="laptops" onclick="filterCategory('laptops')">
+                        <i class="fas fa-laptop"></i>
+                        <span data-i18n="laptops">Laptops</span>
+                    </button>
+                    <button class="category-item" data-category="accessories" onclick="filterCategory('accessories')">
+                        <i class="fas fa-headphones"></i>
+                        <span data-i18n="accessories">Accessories</span>
+                    </button>
+                    <button class="category-item" data-category="tablets" onclick="filterCategory('tablets')">
+                        <i class="fas fa-tablet-alt"></i>
+                        <span data-i18n="tablets">Tablets</span>
+                    </button>
+                </div>
+            </aside>
 
             <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
-                <!-- Built dynamically by JS -->
+            <div class="products-main">
+                <div class="products-header">
+                    <h2 data-i18n="featuredProducts">FEATURED PRODUCTS</h2>
+                    <div class="category-filter" id="categoryFilter"></div>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RECOMMENDED PRODUCTS CAROUSEL ===== -->
+    <section class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 data-i18n="recommendedForYou">Recommended For You</h2>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" onclick="carouselPrev()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next" onclick="carouselNext()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                </div>
             </div>
         </div>
     </section>

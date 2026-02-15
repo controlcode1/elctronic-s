@@ -224,10 +224,21 @@ function buildCategoryFilter() {
 
 function filterCategory(categoryId) {
     currentCategory = categoryId;
-    // Update active pill
+    
+    // Update sidebar buttons
+    document.querySelectorAll('.category-item').forEach(item => {
+        if (item.dataset.category === categoryId) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+    
+    // Update pills if exist
     document.querySelectorAll('.category-pill').forEach(pill => {
         pill.classList.toggle('active', pill.dataset.category === categoryId);
     });
+    
     buildProductCards();
 }
 
@@ -532,3 +543,74 @@ function showToast(message, type = 'success') {
         toast.classList.remove('show');
     }, 3000);
 }
+
+// ============================================
+// PRODUCT CAROUSEL
+// ============================================
+
+let carouselPosition = 0;
+
+function buildCarousel() {
+    const track = document.getElementById('carouselTrack');
+    if (!track || typeof PRODUCTS === 'undefined') return;
+
+    const lang = getLanguage();
+    const recommended = PRODUCTS.slice(0, 6);
+    
+    track.innerHTML = recommended.map(product => {
+        const title = lang === 'ar' ? product.titleAr : product.title;
+        const hasDiscount = product.discount > 0;
+        const discountedPrice = hasDiscount ? (product.price * (1 - product.discount / 100)).toFixed(0) : product.price;
+        
+        let badgeHTML = '';
+        if (product.label) {
+            const labelText = product.label === 'new' ? 'NEW' : 
+                            product.label === 'sale' ? 'SALE' : 
+                            product.label === 'hot' ? 'HOT' : '';
+            badgeHTML = `<div class="product-badge badge-${product.label}">${labelText}</div>`;
+        }
+        
+        return `
+        <div class="carousel-item">
+            <div class="product-card">
+                ${badgeHTML}
+                <div class="product-image">
+                    <img src="${product.image}" alt="${title}" loading="lazy"
+                         onerror="this.src='https://placehold.co/400x300/e2e8f0/64748b?text=No+Image'">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">${title}</h3>
+                    <div class="product-footer">
+                        <div class="product-price-box">
+                            <span class="product-price">$${hasDiscount ? discountedPrice : product.price}</span>
+                            ${hasDiscount ? `<span class="product-price-old">$${product.price}</span>` : ''}
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">${t('addToCart')}</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function carouselNext() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+    
+    const itemWidth = 320 + 24;
+    const maxScroll = (track.children.length - 3) * itemWidth;
+    carouselPosition = Math.min(carouselPosition + itemWidth, maxScroll);
+    track.style.transform = `translateX(-${carouselPosition}px)`;
+}
+
+function carouselPrev() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+    
+    const itemWidth = 320 + 24;
+    carouselPosition = Math.max(carouselPosition - itemWidth, 0);
+    track.style.transform = `translateX(-${carouselPosition}px)`;
+}
+
+// Build carousel on page load
+setTimeout(buildCarousel, 500);
